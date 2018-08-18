@@ -4,7 +4,7 @@ using SignUpSystem.QueueInfrastructure.AbstractSender;
 
 namespace SignUpSystem.QueueInfrastructure.AzureServiceBusSender
 {
-    public class AzureServiceBusQueueSender : IQueueSender
+    internal class AzureServiceBusQueueSender : IQueueSender
     {
         private readonly string _connectionsString;
 

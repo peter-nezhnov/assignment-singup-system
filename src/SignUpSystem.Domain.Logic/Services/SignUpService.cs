@@ -5,7 +5,7 @@ using SignUpSystem.Domain.Models;
 
 namespace SignUpSystem.Domain.Logic.Services
 {
-    public class SignUpService : ISignUpService
+    internal class SignUpService : ISignUpService
     {
         private readonly ICoursePlacesRepository _placesRepository;
 

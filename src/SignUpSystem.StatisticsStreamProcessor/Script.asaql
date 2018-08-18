@@ -1,0 +1,8 @@
+﻿select 
+    courseId,
+    count()
+into
+    Output
+from
+    input
+group by tumblingwindow(second, 30), courseId

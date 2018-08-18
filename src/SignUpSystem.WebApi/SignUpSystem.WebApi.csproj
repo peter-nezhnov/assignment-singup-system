@@ -9,12 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SignUpSystem.Domain.Logic\SignUpSystem.Domain.Logic.csproj" />
     <ProjectReference Include="..\SignUpSystem.Domain.Models\SignUpSystem.Domain.Models.csproj" />
+    <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.AzureServiceBusSender\SignUpSystem.QueueInfrastructure.AzureServiceBusSender.csproj" />
   </ItemGroup>
 
 </Project>

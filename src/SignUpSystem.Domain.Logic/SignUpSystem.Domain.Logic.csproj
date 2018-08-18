@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SignUpSystem.DataAccess.AbstractRepositories\SignUpSystem.DataAccess.AbstractRepositories.csproj" />
-    <ProjectReference Include="..\SignUpSystem.DataAccess.AzureTableStorageRepositories\SignUpSystem.DataAccess.AzureTableStorageRepositories.csproj" />
     <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.Manager\SignUpSystem.QueueInfrastructure.Manager.csproj" />
   </ItemGroup>
 

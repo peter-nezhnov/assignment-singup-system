@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.AbstractSender\SignUpSystem.QueueInfrastructure.AbstractSender.csproj" />
-    <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.AzureServiceBusSender\SignUpSystem.QueueInfrastructure.AzureServiceBusSender.csproj" />
   </ItemGroup>
 
 </Project>

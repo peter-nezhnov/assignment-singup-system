@@ -3,6 +3,7 @@ using SignUpSystem.Domain.Logic;
 using SignUpSystem.Domain.Models;
 using SignUpSystem.WebApi.Dtos;
 using System.Threading.Tasks;
+using SignUpSystem.Domain.Logic.Services;
 
 namespace SignUpSystem.WebApi.Controllers
 {
@@ -10,11 +11,11 @@ namespace SignUpSystem.WebApi.Controllers
     [ApiController]
     public class SignUpController : ControllerBase
     {
-        private readonly ISignUpManager _signUpManager;
+        private readonly ISignUpService _signUpService;
 
-        public SignUpController(ISignUpManager signUpManager)
+        public SignUpController(ISignUpService signUpService)
         {
-            _signUpManager = signUpManager;
+            _signUpService = signUpService;
         }
 
         [HttpPost]
@@ -22,7 +23,7 @@ namespace SignUpSystem.WebApi.Controllers
         {
             //for more complex mappings better to use AutoMapper.
             var user = new User { Name = signUpRequest.UserName, Age = signUpRequest.Age };
-            var result = await _signUpManager.SignUpAsync(signUpRequest.CourseId, user);
+            var result = await _signUpService.SignUpAsync(signUpRequest.CourseId, user);
 
             if (result.Success)
                 return Ok();

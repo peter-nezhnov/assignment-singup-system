@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using SignUpSystem.DataAccess.AbstractRepositories;
 using SignUpSystem.Domain.Models;
 
-namespace SignUpSystem.Domain.Logic
+namespace SignUpSystem.Domain.Logic.Services
 {
-    public class SignUpManager
+    public class SignUpService : ISignUpService
     {
         private readonly ICoursePlacesRepository _placesRepository;
 
-        public SignUpManager(ICoursePlacesRepository placesRepository)
+        public SignUpService(ICoursePlacesRepository placesRepository)
         {
             _placesRepository = placesRepository;
         }

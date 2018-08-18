@@ -16,7 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SignUpSystem.Domain.Logic\SignUpSystem.Domain.Logic.csproj" />
     <ProjectReference Include="..\SignUpSystem.Domain.Models\SignUpSystem.Domain.Models.csproj" />
-    <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.AzureServiceBusSender\SignUpSystem.QueueInfrastructure.AzureServiceBusSender.csproj" />
+    <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.AzureServiceBusSender\SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.AbstractSender\SignUpSystem.QueueInfrastructure.AbstractSender.csproj" />
+    <ProjectReference Include="..\SignUpSystem.QueueInfrastructure.AbstractSender\SignUpSystem.QueueInfrastructure.AbstractBusAdapter.csproj" />
   </ItemGroup>
 
 </Project>

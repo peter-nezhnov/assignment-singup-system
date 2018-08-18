@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QueueInfrastructure", "Queu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpSystem.QueueInfrastructure.Manager", "SignUpSystem.QueueInfrastructure.Manager\SignUpSystem.QueueInfrastructure.Manager.csproj", "{BBBA4842-5934-4864-867C-42C234215819}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpSystem.QueueInfrastructure.AbstractSender", "SignUpSystem.QueueInfrastructure.AbstractSender\SignUpSystem.QueueInfrastructure.AbstractSender.csproj", "{1A7F2A60-D4EE-4E90-A705-28D09B04FC61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpSystem.QueueInfrastructure.AbstractBusAdapter", "SignUpSystem.QueueInfrastructure.AbstractSender\SignUpSystem.QueueInfrastructure.AbstractBusAdapter.csproj", "{1A7F2A60-D4EE-4E90-A705-28D09B04FC61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpSystem.QueueInfrastructure.AzureServiceBusSender", "SignUpSystem.QueueInfrastructure.AzureServiceBusSender\SignUpSystem.QueueInfrastructure.AzureServiceBusSender.csproj", "{58361A7E-F0B7-4B43-BFED-7E53A1414C38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter", "SignUpSystem.QueueInfrastructure.AzureServiceBusSender\SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter.csproj", "{58361A7E-F0B7-4B43-BFED-7E53A1414C38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{0238D76B-6DCA-48F1-B6E3-B2E2D9C9DBFD}"
 EndProject

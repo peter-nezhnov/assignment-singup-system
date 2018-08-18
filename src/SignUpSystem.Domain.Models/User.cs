@@ -1,4 +1,4 @@
-﻿namespace SignUpSystem.Domain.Logic
+﻿namespace SignUpSystem.Domain.Models
 {
     public class User
     {

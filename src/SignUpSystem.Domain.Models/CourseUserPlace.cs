@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SignUpSystem.Domain.Logic
+namespace SignUpSystem.Domain.Models
 {
     public class CourseUserPlace
     {

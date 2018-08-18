@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SignUpSystem.Domain.Logic
+namespace SignUpSystem.Domain.Models
 {
     public class Course
     {

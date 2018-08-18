@@ -1,7 +1,5 @@
-﻿namespace SignUpSystem.Domain.Logic
+﻿namespace SignUpSystem.Domain.Models
 {
-
-    //this is not part of domain. It should be in a separate assembly with helpers and extensions. 
     public class Result
     {
         public Result(bool success)

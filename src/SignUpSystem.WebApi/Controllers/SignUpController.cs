@@ -12,6 +12,11 @@ namespace SignUpSystem.WebApi.Controllers
     {
         private readonly ISignUpManager _signUpManager;
 
+        public SignUpController(ISignUpManager signUpManager)
+        {
+            _signUpManager = signUpManager;
+        }
+
         [HttpPost]
         public async Task<ActionResult> SingUpUserForCourse([FromBody] SignUpRequestDto signUpRequest)
         {
@@ -23,6 +28,14 @@ namespace SignUpSystem.WebApi.Controllers
                 return Ok();
 
             return Conflict("All places are booked.");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SingUpUserForCourseAsync([FromBody] SignUpRequestDto signUpRequest)
+        {
+            //call bus
+            await Task.CompletedTask;
+            return Accepted();
         }
     }
 }

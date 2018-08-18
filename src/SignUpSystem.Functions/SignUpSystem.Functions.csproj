@@ -18,4 +18,9 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EmailConfirmationFunction\" />
+    <Folder Include="QueueToEventHubTransfer\" />
+    <Folder Include="UpdateStatistics\" />
+  </ItemGroup>
 </Project>

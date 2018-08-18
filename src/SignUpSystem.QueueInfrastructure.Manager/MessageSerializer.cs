@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace SignUpSystem.QueueInfrastructure.Manager
 {
@@ -14,6 +15,9 @@ namespace SignUpSystem.QueueInfrastructure.Manager
     {
         public string SerializerMessage(AbstractQueueMessage message)
         {
+            if (message == null)
+                throw new ArgumentException("Message was not provided");
+
             return JsonConvert.SerializeObject(message);
         }
     }

@@ -1,8 +1,11 @@
-﻿select 
+﻿SELECT 
     courseId,
+    avg(age) as AverageAge,
+    min(age) as MinAge,
+    max(age) as MaxAge,
     count()
-into
+INTO
     Output
-from
-    input
-group by tumblingwindow(second, 30), courseId
+FROM
+    Input
+GROUP BY TumblingWindow(second,30), courseId

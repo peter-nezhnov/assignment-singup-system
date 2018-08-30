@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SignUpSystem.Domain.Models;
 using SignUpSystem.WebApi.Dtos;
 using System.Threading.Tasks;
+using Autofac.Features.Indexed;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using SignUpSystem.Domain.Logic;
 using SignUpSystem.Domain.Logic.Services;
 
 namespace SignUpSystem.WebApi.Controllers
@@ -11,12 +13,15 @@ namespace SignUpSystem.WebApi.Controllers
     [ApiController]
     public class SignUpController : ControllerBase
     {
-        private readonly ISignUpService _signUpService;
+        private readonly ISignUpService _asyncSignUpService;
+        private readonly ISignUpService _syncSignUpService;
         private readonly ILogger<SignUpController> _logger;
 
-        public SignUpController(ISignUpService signUpService, ILogger<SignUpController> logger)
+        public SignUpController(IIndex<SignUpServiceType, ISignUpService> signUpServices, ILogger<SignUpController> logger)
         {
-            _signUpService = signUpService;
+            _asyncSignUpService = signUpServices[SignUpServiceType.Async];
+            _syncSignUpService = signUpServices[SignUpServiceType.Sync];
+
             _logger = logger;
         }
 
@@ -25,23 +30,25 @@ namespace SignUpSystem.WebApi.Controllers
         [Route("sync")]
         public async Task<ActionResult> SingUpUserForCourse([FromBody] SignUpRequestDto signUpRequest)
         {
-
-            //for more complex mappings better to use AutoMapper.
-            var user = new User { Name = signUpRequest.UserName, Age = signUpRequest.Age };
-            var result = await _signUpService.SignUpAsync(signUpRequest.CourseId, user);
+            var (courseId, user) = signUpRequest;
+            
+            var result = await _syncSignUpService.SignUpAsync(courseId, user);
 
             if (result.Success)
                 return Ok();
 
-            return Conflict("All places are booked.");
+            //then only way our logic can return fail - if there is no empty places
+            return new StatusCodeResult(StatusCodes.Status410Gone);
         }
 
         [HttpPost]
         [Route("async")]
         public async Task<ActionResult> SingUpUserForCourseAsync([FromBody] SignUpRequestDto signUpRequest)
         {
-            //call bus
-            await Task.CompletedTask;
+            var (courseId, user) = signUpRequest;
+
+            await _asyncSignUpService.SignUpAsync(courseId, user);
+
             return Accepted();
         }
     }

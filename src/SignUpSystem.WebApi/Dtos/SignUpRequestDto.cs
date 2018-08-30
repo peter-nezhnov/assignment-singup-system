@@ -1,4 +1,5 @@
 ﻿using System;
+using SignUpSystem.Domain.Models;
 
 namespace SignUpSystem.WebApi.Dtos
 {
@@ -9,5 +10,15 @@ namespace SignUpSystem.WebApi.Dtos
         public string UserName { get; set; }
 
         public byte Age { get; set; }
+
+        public void Deconstruct(out Guid courseId, out User user)
+        {
+            courseId = CourseId;
+            user = new User
+            {
+                Age = Age,
+                Name = UserName
+            };
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using SignUpSystem.Domain.Logic.Services;
+using SignUpSystem.Domain.Logic.Services.Implementations;
 
 namespace SignUpSystem.Domain.Logic
 {

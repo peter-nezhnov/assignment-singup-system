@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Azure.ServiceBus;
 using SignUpSystem.QueueInfrastructure.AbstractSender;
 
-namespace SignUpSystem.QueueInfrastructure.AzureServiceBusSender
+namespace SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter
 {
     internal class AzureServiceBusQueueSender : IQueueSender
     {
-        private readonly string _connectionsString;
+        private readonly QueueClient _queueClient;
 
         public AzureServiceBusQueueSender(string connectionsString)
         {
-            _connectionsString = connectionsString;
+            _queueClient 
+                = new QueueClient(
+                    new ServiceBusConnectionStringBuilder(connectionsString), 
+                    ReceiveMode.PeekLock //default value but giid to be explicti
+                );
         }
 
         public async Task SendMessageAsync(string queueName, string message)
         {
             try
             {
-                //TODO use Azure SDK
-                await Task.CompletedTask;
+                byte[] messageBody = System.Text.Encoding.Unicode.GetBytes(message);
+                
+                await _queueClient.SendAsync(new Message(messageBody));
             }
             catch (Exception anyException)
             {
-                //TODO log here
                 throw new QueueSenderException("Was not able to send message", anyException);
             }
             

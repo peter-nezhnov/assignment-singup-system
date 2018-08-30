@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using SignUpSystem.Domain.Logic;
-using SignUpSystem.QueueInfrastructure.AzureServiceBusSender;
+using SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter;
 using SignUpSystem.QueueInfrastructure.Manager;
 
 namespace SignUpSystem.WebApi.Start

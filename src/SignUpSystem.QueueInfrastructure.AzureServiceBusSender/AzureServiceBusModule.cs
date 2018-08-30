@@ -2,7 +2,7 @@
 using Autofac;
 using SignUpSystem.QueueInfrastructure.AbstractSender;
 
-namespace SignUpSystem.QueueInfrastructure.AzureServiceBusSender
+namespace SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter
 {
     public class AzureServiceBusModule : Module
     {

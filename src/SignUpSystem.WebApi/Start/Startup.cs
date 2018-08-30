@@ -1,12 +1,14 @@
 ﻿using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SignUpSystem.WebApi.Middleware;
+using SignUpSystem.WebApi.Validators;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SignUpSystem.WebApi.Start
@@ -36,7 +38,9 @@ namespace SignUpSystem.WebApi.Start
                 c.SwaggerDoc("v1", new Info { Title = "SignUpSystemApi", Version = "v1" });
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<SignUpRequestDtoValidator>());
 
             builder.Populate(services);
             ApplicationContainer = builder.Build();

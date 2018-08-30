@@ -9,7 +9,7 @@ namespace SignUpSystem.WebApi.Dtos
 
         public string UserName { get; set; }
 
-        public byte Age { get; set; }
+        public int Age { get; set; }
 
         public void Deconstruct(out Guid courseId, out User user)
         {

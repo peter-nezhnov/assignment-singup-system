@@ -1,21 +1,22 @@
 using SignUpSystem.QueueInfrastructure.Manager;
 using System;
+using SignUpSystem.Domain.Models.Commands;
 using Xunit;
 
 namespace SignUpSystem.UnitTests
 {
     public class MessageSerializerTests
     {
-        MessageSerializer _messageSerializer = new MessageSerializer();
+        readonly CommandsSerializer _commandsSerializer = new CommandsSerializer();
 
         public class SerializerMessageMethod : MessageSerializerTests
         {
             [Fact]
             public void can_serialize_valid_message()
             {
-                var validaMessage = new SignUpMessage();
+                var command = new SignUpCommand();
 
-                var result = _messageSerializer.SerializerMessage(validaMessage);
+                var result = _commandsSerializer. SerializerMessage(command);
 
                 Assert.Equal("{}", result);
             }
@@ -23,7 +24,7 @@ namespace SignUpSystem.UnitTests
             [Fact]
             public void can_not_serialize_null_value()
             {
-                Assert.Throws<ArgumentException>(() => _messageSerializer.SerializerMessage(null));
+                Assert.Throws<ArgumentException>(() => _commandsSerializer.SerializerMessage(null));
             }
         }
     }

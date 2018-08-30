@@ -13,7 +13,7 @@ namespace SignUpSystem.QueueInfrastructure.Manager
             if(Settings == null)
                 throw new ApplicationException($"Can't instantiate {nameof(QueueManagerModule)}");
 
-            builder.RegisterType<MessageSerializer>().As<IMessageSerializer>().SingleInstance();
+            builder.RegisterType<CommandsSerializer>().As<ICommandsSerializer>().SingleInstance();
             builder.RegisterType<QueuesManager>().As<IQueuesManager>()
                 .WithParameter("settings", Settings);
         }

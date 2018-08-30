@@ -1,29 +1,30 @@
 ﻿using System.Threading.Tasks;
+using SignUpSystem.Domain.Models.Commands;
 using SignUpSystem.QueueInfrastructure.AbstractSender;
 
 namespace SignUpSystem.QueueInfrastructure.Manager
 {
-    internal interface IQueuesManager
+    public interface IQueuesManager
     {
-        Task SendSignUpMessageAsync(SignUpMessage message);
+        Task SendSignUpCommandAsync(SignUpCommand command);
     }
 
     class QueuesManager : IQueuesManager
     {
         private readonly IQueueSender _queueSender;
-        private readonly IMessageSerializer _messageSerializer;
+        private readonly ICommandsSerializer _commandsSerializer;
         private readonly QueueManagerSettings _settings;
 
-        public QueuesManager(IQueueSender queueSender, IMessageSerializer messageSerializer, QueueManagerSettings settings)
+        public QueuesManager(IQueueSender queueSender, ICommandsSerializer commandsSerializer, QueueManagerSettings settings)
         {
             _queueSender = queueSender;
-            _messageSerializer = messageSerializer;
+            _commandsSerializer = commandsSerializer;
             _settings = settings;
         }
 
-        public async Task SendSignUpMessageAsync(SignUpMessage message)
+        public async Task SendSignUpCommandAsync(SignUpCommand command)
         {
-            var serialized = _messageSerializer.SerializerMessage(message);
+            var serialized = _commandsSerializer.SerializerMessage(command);
 
             await _queueSender.SendMessageAsync(_settings.SingUpQueueName, serialized);
         }

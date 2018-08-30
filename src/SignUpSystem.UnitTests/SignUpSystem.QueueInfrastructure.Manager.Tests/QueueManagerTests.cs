@@ -1,15 +1,16 @@
-using SignUpSystem.QueueInfrastructure.Manager;
 using System.Threading.Tasks;
 using NSubstitute;
-using Xunit;
+using SignUpSystem.Domain.Models.Commands;
 using SignUpSystem.QueueInfrastructure.AbstractSender;
+using SignUpSystem.QueueInfrastructure.Manager;
+using Xunit;
 
-namespace SignUpSystem.UnitTests
+namespace SignUpSystem.UnitTests.SignUpSystem.QueueInfrastructure.Manager.Tests
 {
     public class QueueManagerTests
     {
         IQueueSender _queueSenderMock;
-        IMessageSerializer _messageSerializerMock;
+        ICommandsSerializer _commandsSerializerMock;
         QueueManagerSettings _settings;
         QueuesManager _queuesManager;
 
@@ -17,10 +18,10 @@ namespace SignUpSystem.UnitTests
         public QueueManagerTests()
         {
             _queueSenderMock = Substitute.For<IQueueSender>();
-            _messageSerializerMock = Substitute.For<IMessageSerializer>();
+            _commandsSerializerMock = Substitute.For<ICommandsSerializer>();
             _settings = new QueueManagerSettings("1");
 
-           _queuesManager = new QueuesManager(_queueSenderMock, _messageSerializerMock, _settings);
+           _queuesManager = new QueuesManager(_queueSenderMock, _commandsSerializerMock, _settings);
         }
 
         public class SendSignUpMessageAsyncMethod : QueueManagerTests
@@ -28,13 +29,12 @@ namespace SignUpSystem.UnitTests
             [Fact]
             public async Task some_test()
             {
-                var message = new SignUpMessage();
-                await _queuesManager.SendSignUpMessageAsync(message);
+                var command = new SignUpCommand();
+                await _queuesManager.SendSignUpCommandAsync(command);
 
-                _messageSerializerMock.Received().SerializerMessage(Arg.Is(message));
+                _commandsSerializerMock.Received().SerializerMessage(Arg.Is(command));
                 //check the calls to whatever
             }
-
 
             //Long list of tests
         }

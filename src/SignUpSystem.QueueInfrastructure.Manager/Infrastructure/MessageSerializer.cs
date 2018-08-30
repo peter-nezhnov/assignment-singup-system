@@ -1,24 +1,24 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using SignUpSystem.Domain.Models.Commands;
+using SingUpSystem.Infrastructure.Utils;
 
 namespace SignUpSystem.QueueInfrastructure.Manager
 {
-    internal interface IMessageSerializer
+    internal interface ICommandsSerializer
     {
-        string SerializerMessage(AbstractQueueMessage message);
+        string SerializerMessage(IBaseSignUpSystemCommand command);
     }
 
     /// <summary>
     /// Can be as well in BusSender Implementation. Depends which part dictates rules for serialization.
     /// </summary>
-    class MessageSerializer : IMessageSerializer
+    class CommandsSerializer : ICommandsSerializer
     {
-        public string SerializerMessage(AbstractQueueMessage message)
+        public string SerializerMessage(IBaseSignUpSystemCommand command)
         {
-            if (message == null)
-                throw new ArgumentException("Message was not provided");
+            HolyGuard.ThrowExceptionIfObjectIsNull(command);
 
-            return JsonConvert.SerializeObject(message);
+            return JsonConvert.SerializeObject(command);
         }
     }
 }

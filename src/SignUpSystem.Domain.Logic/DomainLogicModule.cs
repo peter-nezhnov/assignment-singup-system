@@ -8,7 +8,8 @@ namespace SignUpSystem.Domain.Logic
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<SignUpService>().As<ISignUpService>();
+            builder.RegisterType<SyncSignUpService>().Named<ISignUpService>("sync");
+            builder.RegisterType<AsyncSignUpService>().Named<ISignUpService>("async");
         }
     }
 }

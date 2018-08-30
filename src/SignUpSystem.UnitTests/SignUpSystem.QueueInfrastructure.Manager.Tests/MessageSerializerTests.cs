@@ -18,7 +18,7 @@ namespace SignUpSystem.UnitTests
 
                 var result = _commandsSerializer. SerializerMessage(command);
 
-                Assert.Equal("{}", result);
+                Assert.Equal(@"{""CourseId"":""00000000-0000-0000-0000-000000000000"",""User"":null}", result);
             }
 
             [Fact]

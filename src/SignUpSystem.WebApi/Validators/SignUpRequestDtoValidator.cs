@@ -11,6 +11,7 @@ namespace SignUpSystem.WebApi.Validators
     {
         public SignUpRequestDtoValidator()
         {
+            //here we can inject repository to check that Course exists
             RuleFor(x => x.Age).GreaterThan(0);
             RuleFor(x => x.UserName).NotEmpty();
             RuleFor(x => x.CourseId).NotEqual(default(Guid));

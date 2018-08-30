@@ -5,46 +5,31 @@ using SignUpSystem.Domain.Models;
 
 namespace SignUpSystem.Domain.Logic.Services.Implementations
 {
-  
+
     internal class SyncSignUpService : ISignUpService
     {
-        private readonly ICoursePlacesRepository _placesRepository;
+        private readonly ICoursesRepository _coursesRepository;
 
-  
-        //public SignUpService(ICoursePlacesRepository placesRepository)
-        //{
-        //    _placesRepository = placesRepository;
-        //}
+        public SyncSignUpService(ICoursesRepository coursesRepository)
+        {
+            _coursesRepository = coursesRepository;
+        }
 
         public async Task<Result> SignUpAsync(Guid courseId, User user)
         {
+            var course = await _coursesRepository.GetCourseAsync(courseId);
 
-            try
-            {
-                var emptyPlace = await _placesRepository.GetEmptyPlaceAsync(courseId);
+            var emptyPlace = course.FindEmptyPlace();
 
-                //can be used Maybe<> wrapper to add readablity
-                if (emptyPlace == null)
-                    return Result.FailedResult;
+            //can be used Maybe<> wrapper to add readablity
+            if (emptyPlace == null)
+                return Result.FailedResult;
 
-                var bookedPlace = AssignUserToEmptyPlace(emptyPlace, user);
+            emptyPlace.BookPlaceForUser(user);
 
-                return await _placesRepository.UpdatePlaceAsync(bookedPlace);
-            }
-            catch (Exception anyException)
-            {
-                //TODO logging
-                //Here should be custom exception from this project. Reference inner exception.
-                throw new Exception("Can't perform sign up action. See inner exception for details.", anyException);
+            await _coursesRepository.SaveChangesAsync(course);
 
-            }
-        }
-
-        private CourseUserPlace AssignUserToEmptyPlace(CourseUserPlace place, User user)
-        {
-            place.RegisterdUser = user;
-
-            return place;
+            return Result.SuccessResult;
         }
     }
 }

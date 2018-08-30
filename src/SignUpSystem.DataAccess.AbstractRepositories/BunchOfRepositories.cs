@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace SignUpSystem.DataAccess.AbstractRepositories
 {
-
     public interface ICoursePlacesRepository
     {
         Task<CourseUserPlace> GetEmptyPlaceAsync(Guid courseId);
@@ -28,5 +27,6 @@ namespace SignUpSystem.DataAccess.AbstractRepositories
         Task<Course> GetCourseAsync(Guid courseId);
 
         Task<List<Course>> GetCoursesAsync();
+        Task SaveChangesAsync(Course course);
     }
 }

@@ -11,5 +11,10 @@ namespace SignUpSystem.Domain.Models
         public long PlaceNumer { get; set; }
 
         public bool Booked => RegisterdUser != null;
+
+        public void BookPlaceForUser(User user)
+        {
+            RegisterdUser = user;
+        }
     }
 }

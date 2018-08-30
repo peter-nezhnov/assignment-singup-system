@@ -2,13 +2,11 @@
 {
     public class QueueManagerSettings
     {
-        public QueueManagerSettings(string singUpQueueName, string connectionString)
+        public QueueManagerSettings(string singUpQueueName)
         {
             SingUpQueueName = singUpQueueName;
-            ConnectionString = connectionString;
         }
 
         public readonly string SingUpQueueName;
-        public readonly string ConnectionString;
     }
 }

@@ -9,11 +9,11 @@ namespace SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter
     {
         private readonly QueueClient _queueClient;
 
-        public AzureServiceBusQueueSender(string connectionsString)
+        public AzureServiceBusQueueSender(string queueConnectionString)
         {
             _queueClient 
                 = new QueueClient(
-                    new ServiceBusConnectionStringBuilder(connectionsString), 
+                    new ServiceBusConnectionStringBuilder(queueConnectionString), 
                     ReceiveMode.PeekLock //default value but giid to be explicti
                 );
         }
@@ -28,7 +28,7 @@ namespace SignUpSystem.QueueInfrastructure.AzureServiceBusAdapter
             }
             catch (Exception anyException)
             {
-                throw new QueueSenderException("Was not able to send message", anyException);
+                throw new QueueSenderException($"Can't send message to the queue. Message = { message }", anyException);
             }
             
         }

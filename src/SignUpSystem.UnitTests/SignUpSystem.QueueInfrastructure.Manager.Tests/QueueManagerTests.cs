@@ -18,7 +18,7 @@ namespace SignUpSystem.UnitTests
         {
             _queueSenderMock = Substitute.For<IQueueSender>();
             _messageSerializerMock = Substitute.For<IMessageSerializer>();
-            _settings = new QueueManagerSettings("1", "2");
+            _settings = new QueueManagerSettings("1");
 
            _queuesManager = new QueuesManager(_queueSenderMock, _messageSerializerMock, _settings);
         }

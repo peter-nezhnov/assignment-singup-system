@@ -12,7 +12,7 @@ namespace SignUpSystem.WebApi.Start
             builder.RegisterModule<DomainLogicModule>();
             builder.RegisterModule(new QueueManagerModule
             {
-                Settings = new QueueManagerSettings("populate", "fron config")
+                Settings = new QueueManagerSettings("queueName")
             });
             builder.RegisterModule(new AzureServiceBusModule
             {

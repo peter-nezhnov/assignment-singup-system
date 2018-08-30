@@ -14,7 +14,8 @@ namespace SignUpSystem.QueueInfrastructure.Manager
                 throw new ApplicationException($"Can't instantiate {nameof(QueueManagerModule)}");
 
             builder.RegisterType<MessageSerializer>().As<IMessageSerializer>().SingleInstance();
-            builder.RegisterType<QueuesManager>().As<IQueuesManager>();
+            builder.RegisterType<QueuesManager>().As<IQueuesManager>()
+                .WithParameter("settings", Settings);
         }
     }
 }

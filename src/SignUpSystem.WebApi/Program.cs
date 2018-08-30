@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using SignUpSystem.WebApi.Start;
 
 namespace SignUpSystem.WebApi
 {
@@ -19,6 +20,8 @@ namespace SignUpSystem.WebApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseIISIntegration()
+                .UseKestrel()
                 .UseStartup<Startup>();
     }
 }

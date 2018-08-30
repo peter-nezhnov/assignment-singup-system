@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SignUpSystem.Domain.Logic;
-using SignUpSystem.QueueInfrastructure.AzureServiceBusSender;
-using SignUpSystem.QueueInfrastructure.Manager;
+using Swashbuckle.AspNetCore.Swagger;
 
-namespace SignUpSystem.WebApi
+namespace SignUpSystem.WebApi.Start
 {
     public class Startup
     {
@@ -24,23 +23,26 @@ namespace SignUpSystem.WebApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
+        public IContainer ApplicationContainer { get; private set; }
 
-        public void ConfigureContainer(ContainerBuilder builder)
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            builder.RegisterModule<DomainLogicModule>();
-            builder.RegisterModule(new QueueManagerModule
+            var builder = new ContainerBuilder();
+
+            ContainerConfiguration.ConfigureContainer(builder);
+
+            services.AddSwaggerGen(c =>
             {
-                Settings = new QueueManagerSettings("populate", "fron config")
+                c.SwaggerDoc("v1", new Info { Title = "SignUpSystemApi", Version = "v1" });
             });
-            builder.RegisterModule(new AzureServiceBusModule
-            {
-                ConnectionString = "from config"
-            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            builder.Populate(services);
+            ApplicationContainer = builder.Build();
+
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +52,13 @@ namespace SignUpSystem.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseMvc();
         }

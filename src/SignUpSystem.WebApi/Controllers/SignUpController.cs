@@ -19,6 +19,7 @@ namespace SignUpSystem.WebApi.Controllers
         }
 
         [HttpPost]
+        [Route("sync")]
         public async Task<ActionResult> SingUpUserForCourse([FromBody] SignUpRequestDto signUpRequest)
         {
             //for more complex mappings better to use AutoMapper.
@@ -32,6 +33,7 @@ namespace SignUpSystem.WebApi.Controllers
         }
 
         [HttpPost]
+        [Route("async")]
         public async Task<ActionResult> SingUpUserForCourseAsync([FromBody] SignUpRequestDto signUpRequest)
         {
             //call bus

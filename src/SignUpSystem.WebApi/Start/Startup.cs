@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SignUpSystem.WebApi.Middleware;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SignUpSystem.WebApi.Start
@@ -46,6 +47,8 @@ namespace SignUpSystem.WebApi.Start
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseExceptionLoggerMiddleware();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

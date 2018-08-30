@@ -9,10 +9,10 @@ namespace SignUpSystem.Domain.Logic.Services
     {
         private readonly ICoursePlacesRepository _placesRepository;
 
-        public SignUpService(ICoursePlacesRepository placesRepository)
-        {
-            _placesRepository = placesRepository;
-        }
+        //public SignUpService(ICoursePlacesRepository placesRepository)
+        //{
+        //    _placesRepository = placesRepository;
+        //}
 
         public async Task<Result> SignUpAsync(Guid courseId, User user)
         {
